@@ -116,7 +116,7 @@ This system provides:
 ---
 
 ## 9️⃣ System Architecture
-```mermaid
+[```mermaid
 erDiagram
 
     SHOP_OWNER {
@@ -182,7 +182,7 @@ erDiagram
 
 
 
-
+](https://mermaid.live/edit#pako:eNqNVGFv2jAQ_SuRP1OUwgrB3xjNoCosqKGqNCFFbnIN1mI7s52tHfDf5wChwSHS8sn2O997vneXLYpFAggjkPeUpJKwNV9zx3zhLFhGwct3_8nZHk_Kj3LtiD8cZEQTZ_n4CSgtKU9PGCcMGhATrzSDiBfsFWQDVRuR1-7tKxmT53AVLJoi4kJpwVp1nOGrUs5ovhHcZlw-BffPk5VNmEuRFLFu4avQS7q3TBDtFJzqKJc0tpm-PsznNo2pUWZzJETDEShXdnotNMkiwkTBdXuNvj22mFgBF6qih5W_uC5NA7P11XXbPLWy2dCvgnBN9Yf9oGulepmNV-F4uYwWfhiOp76tjYFSJIX_VVa5Vtrf1pFVSg3vugEmkNHfID8ipYku1KVXmjJwFHAdlSvrJdMgmM79KJz5fqPH1AagLFVzOrSQkERnQw0LaQuqGoVcEZURpaMiL_eJpas277vdzY3Yfo4edhjhphTKGslT3KGNsSMhBlMT1ZbuFJaCaTzDr2ozUIs4dh52YsE1oVxdzuSVQMrjrEga6Xa7Zs_g0pSk5RUXvuCqmJQ3ZbZHog5KJU0Q1rKADjJOMVJu0cHnNdIbMP2AsFkmRP5cozXfmzs54T-EYNU1KYp0g_AbyZTZHd06_ZzPp9I8BOSknHmEb_vuIQnCW_SOcN8ddnv9u8Fg4PZ6d26_10Ef5nTQHbhDc-R6_aHnjUb7Dvp7YHW73sj1vGHvy61nbnkjb_8PM4LbjA)
 ---
 
 ## 🔁 10️⃣ Software Development Life Cycle (SDLC)
