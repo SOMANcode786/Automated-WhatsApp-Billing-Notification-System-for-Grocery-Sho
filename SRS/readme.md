@@ -116,73 +116,9 @@ This system provides:
 ---
 
 ## 9️⃣ System Architecture
-[```mermaid
-erDiagram
-
-    SHOP_OWNER {
-        int owner_id PK
-        string owner_name
-        string mobile_number
-        string shop_name
-    }
-
-    CUSTOMER {
-        int customer_id PK
-        string customer_name
-        string customer_phone
-    }
-
-    PRODUCT {
-        int product_id PK
-        string product_name
-        float unit_price
-    }
-
-    BILL {
-        int bill_id PK
-        date bill_date
-        float total_amount
-        int customer_id FK
-        int owner_id FK
-    }
-
-    BILL_ITEM {
-        int bill_item_id PK
-        int bill_id FK
-        int product_id FK
-        int quantity
-        float price
-    }
-
-    WHATSAPP_MESSAGE {
-        int message_id PK
-        int bill_id FK
-        string phone_number
-        string message_text
-        string delivery_status
-        datetime sent_time
-    }
-
-    GOOGLE_SHEET {
-        int sheet_id
-        string stored_customer_data
-        string stored_bill_data
-        datetime last_updated
-    }
-
-    SHOP_OWNER ||--o{ CUSTOMER : manages
-    CUSTOMER ||--o{ BILL : receives
-    SHOP_OWNER ||--o{ BILL : generates
-    BILL ||--o{ BILL_ITEM : contains
-    PRODUCT ||--o{ BILL_ITEM : includes
-    BILL ||--|| WHATSAPP_MESSAGE : sends
-    CUSTOMER ||--o{ GOOGLE_SHEET : stored_in
-    BILL ||--o{ GOOGLE_SHEET : stored_in
+<img width="989" height="718" alt="image" src="https://github.com/user-attachments/assets/d22a1f09-3a01-4706-b167-f5e78ecfb237" />
 
 
-
-
-](https://mermaid.live/edit#pako:eNqNVGFv2jAQ_SuRP1OUwgrB3xjNoCosqKGqNCFFbnIN1mI7s52tHfDf5wChwSHS8sn2O997vneXLYpFAggjkPeUpJKwNV9zx3zhLFhGwct3_8nZHk_Kj3LtiD8cZEQTZ_n4CSgtKU9PGCcMGhATrzSDiBfsFWQDVRuR1-7tKxmT53AVLJoi4kJpwVp1nOGrUs5ovhHcZlw-BffPk5VNmEuRFLFu4avQS7q3TBDtFJzqKJc0tpm-PsznNo2pUWZzJETDEShXdnotNMkiwkTBdXuNvj22mFgBF6qih5W_uC5NA7P11XXbPLWy2dCvgnBN9Yf9oGulepmNV-F4uYwWfhiOp76tjYFSJIX_VVa5Vtrf1pFVSg3vugEmkNHfID8ipYku1KVXmjJwFHAdlSvrJdMgmM79KJz5fqPH1AagLFVzOrSQkERnQw0LaQuqGoVcEZURpaMiL_eJpas277vdzY3Yfo4edhjhphTKGslT3KGNsSMhBlMT1ZbuFJaCaTzDr2ozUIs4dh52YsE1oVxdzuSVQMrjrEga6Xa7Zs_g0pSk5RUXvuCqmJQ3ZbZHog5KJU0Q1rKADjJOMVJu0cHnNdIbMP2AsFkmRP5cozXfmzs54T-EYNU1KYp0g_AbyZTZHd06_ZzPp9I8BOSknHmEb_vuIQnCW_SOcN8ddnv9u8Fg4PZ6d26_10Ef5nTQHbhDc-R6_aHnjUb7Dvp7YHW73sj1vGHvy61nbnkjb_8PM4LbjA)
 ---
 
 ## 🔁 10️⃣ Software Development Life Cycle (SDLC)
