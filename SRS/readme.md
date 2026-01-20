@@ -299,3 +299,5 @@ This project is licensed for **educational and small business usage only**.
 
 ⭐ *This system enables small businesses to move toward digital automation using simple and accessible tools.*
 
+
+
