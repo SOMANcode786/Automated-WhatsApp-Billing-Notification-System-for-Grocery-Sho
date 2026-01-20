@@ -1,321 +1,301 @@
-```markdown
-# 📋 Software Requirements Specification (SRS)
+# 📦 Automated WhatsApp Grocery Billing & Notification System
 
-**Project**: Automated WhatsApp Billing & Notification System for Grocery Shop  
-**Version**: 1.0  
-**Date**: January 2026  
-**Author**: Muhammad Soman  
-**Status**: Approved for Phase 1 Development
+A lightweight, mobile-first system that enables grocery shop owners to **automatically generate monthly bills and send them to customers via WhatsApp Business**.
 
 ---
 
-## 📋 Table of Contents
+## 📖 Table of Contents
 
-1. [Introduction](#introduction)
-2. [System Objectives](#system-objectives)
-3. [Scope](#scope)
-4. [Definitions & Acronyms](#definitions)
-5. [Functional Requirements](#functional-requirements)
-6. [Non-Functional Requirements](#non-functional-requirements)
-7. [System Architecture](#system-architecture)
-8. [Data Requirements](#data-requirements)
-9. [Interface Requirements](#interface-requirements)
-10. [Constraints](#constraints)
-11. [Assumptions & Dependencies](#assumptions)
-12. [Verification & Validation](#verification)
-
----
-
-## 1. Introduction
-
-### 1.1 Purpose
-This Software Requirements Specification (SRS) defines the complete **functional and non-functional requirements** for the **Automated WhatsApp Billing & Notification System** designed for grocery shops.
-
-### 1.2 Intended Audience
-- Grocery Shop Owner (Primary User)
-- System Developer (Muhammad Soman)
-- Future Stakeholders (Phase 2)
-
-### 1.3 Document Overview
-This SRS serves as the **technical blueprint** for Phase 1 implementation, mapping **business requirements (BRD)** to **executable software specifications**.
+1. Introduction  
+2. Problem Statement  
+3. Proposed Solution  
+4. Objectives  
+5. Scope  
+6. Target Users  
+7. Functional Requirements  
+8. Non-Functional Requirements  
+9. System Architecture  
+10. Software Development Life Cycle (SDLC)  
+11. Use Case Diagram  
+12. Use Case Descriptions  
+13. Data Design  
+14. Message Format  
+15. Security Considerations  
+16. Deployment Strategy  
+17. Risk Analysis  
+18. Future Enhancements  
+19. Tools & Technologies  
+20. Author  
+21. License  
 
 ---
 
-## 2. System Objectives
+## 1️⃣ Introduction
 
-**Primary Goal**: Automate monthly billing notifications via WhatsApp to reduce manual effort by **95%** and improve payment collection efficiency.
+The **Automated WhatsApp Grocery Billing & Notification System** is designed to help small grocery shop owners digitize monthly billing operations using **WhatsApp Business**.
 
-**Measurable Objectives**:
-- Send 100% of monthly bills on 1st at 10:00 AM PKT
-- Zero WhatsApp account bans
-- Reduce manual billing time from 3 hours to 5 minutes/month
-- 30% improvement in on-time payments
+The system calculates grocery bills, utility charges, and other expenses, then automatically sends a **professional bill message** to each customer.
 
 ---
 
-## 3. Scope
+## 2️⃣ Problem Statement
 
-### 3.1 In Scope (Phase 1)
-```
-✅ FR-01: Customer Data Management
-✅ FR-02: Automatic Bill Calculation  
-✅ FR-03: WhatsApp Integration (Web)
-✅ FR-04: Monthly Scheduling
-✅ FR-05: Message Template System
-✅ FR-06: Manual Test Trigger
-```
+Small grocery shop owners face challenges such as:
 
-### 3.2 Out of Scope (Phase 1)
-```
-❌ Online Payments
-❌ PDF Invoice Generation
-❌ Customer Reply Handling
-❌ Multi-shop Management
-❌ SMS/Email Notifications
-❌ Web Admin Dashboard
-```
+- Manual bill calculation
+- Paper-based customer records
+- Missed or delayed payment reminders
+- Communication gaps with customers
+- Lack of technical resources
 
 ---
 
-## 4. Definitions & Acronyms
+## 3️⃣ Proposed Solution
 
-| **Term** | **Definition** |
-|----------|----------------|
-| **BRD** | Business Requirements Document |
-| **SRS** | Software Requirements Specification |
-| **WhatsApp Number** | Phone number format: `923001234567` (country code included) |
-| **LastSent** | Date column tracking last message sent per customer |
-| **PKT** | Pakistan Standard Time (UTC+5) |
+This system provides:
 
----
-
-## 5. Functional Requirements
-
-### FR-01: Customer Data Management
-```
-INPUT: CustomerName, WhatsAppNumber, GroceryBill, ElectricBill
-STORAGE: Google Sheets Row
-OUTPUT: Validated customer record
-```
-
-**Preconditions**: 
-- WhatsAppNumber format: 12 digits starting with 92
-- Bills ≥ 0
-
-**Postconditions**: New/updated row in Google Sheets
-
-### FR-02: Bill Calculation
-```
-TotalBill = GroceryBill + ElectricBill
-OUTPUT: TotalBill (Number, 2 decimal places)
-```
-
-**Validation**: 
-- Total ≥ 0
-- No negative values accepted
-
-### FR-03: WhatsApp Integration
-```
-API: whatsapp-web.js v1.22+
-METHOD: client.sendMessage(number@c.us, message)
-SUCCESS: 'Message sent successfully'
-```
-
-### FR-04: Automated Scheduling
-```
-CRON: '0 10 1 * *' (1st day, 10:00 AM PKT)
-TIMEZONE: Asia/Karachi
-TRIGGER: All eligible customers (LastSent ≠ current month)
-```
-
-### FR-05: Message Template
-```
-FORMAT:
-Assalam-o-Alaikum {{CustomerName}},
-
-🛒 Grocery Bill: Rs {{Grocery}}
-💡 Electric Bill: Rs {{Electric}}
-────────────────────
-💰 Total Bill: Rs {{Total}}
-
-Kindly pay by due date.
-
-Shukriya,
-{{ShopName}}
-```
-
-### FR-06: Manual Trigger
-```
-COMMAND: npm run manual
-INPUT: Customer row number OR 'all'
-OUTPUT: Test message sent
-```
+- Centralized customer billing data
+- Automated monthly bill calculations
+- WhatsApp-based bill delivery
+- Minimal technical dependency
+- Mobile-only usability
 
 ---
 
-## 6. Non-Functional Requirements
+## 4️⃣ Objectives
 
-### NFR-01: Performance
-| **Metric** | **Requirement** |
-|------------|-----------------|
-| Messages/second | ≤ 1 msg every 2 seconds |
-| Total customers | ≤ 100 customers/month |
-| Response time | < 5 seconds per customer |
-
-### NFR-02: Reliability
-| **Metric** | **Requirement** |
-|------------|-----------------|
-| Uptime | 99% monthly |
-| Delivery rate | 100% to active WhatsApp numbers |
-| Duplicate prevention | LastSent column enforcement |
-
-### NFR-03: Security
-- Google Sheets: Service Account (read/write only)
-- WhatsApp: Business Account only
-- No customer data logging
-- Environment variables for credentials
-
-### NFR-04: Usability
-- Shop owner: No coding required
-- Manual trigger via single command
-- Clear success/failure console output
-- Google Sheets editable by owner
-
-### NFR-05: Compliance
-- WhatsApp Business Terms compliance
-- 1 message per customer per month maximum
-- Opt-out handling (manual sheet removal)
+- Automate monthly grocery billing
+- Reduce manual errors
+- Improve customer communication
+- Ensure timely bill notifications
+- Enable digital transformation for small shops
 
 ---
 
-## 7. System Architecture
+## 5️⃣ Scope
 
+### Included
+- Customer record management
+- Monthly bill calculation
+- WhatsApp message notifications
+
+### Excluded
+- Online payment processing
+- Mobile application (future scope)
+
+---
+
+## 6️⃣ Target Users
+
+- Grocery Shop Owners
+- Kirana Store Owners
+- Small Retail Businesses
+- Non-technical users
+
+---
+
+## 7️⃣ Functional Requirements
+
+| ID | Requirement |
+|----|------------|
+| FR-01 | Add, edit, delete customer records |
+| FR-02 | Store monthly billing data |
+| FR-03 | Calculate total monthly bill |
+| FR-04 | Send bill via WhatsApp |
+| FR-05 | Send payment reminders |
+
+---
+
+## 8️⃣ Non-Functional Requirements
+
+- System must be simple to use
+- Messages must be delivered reliably
+- Customer data must remain confidential
+- System should be scalable
+
+---
+
+## 9️⃣ System Architecture
 ```mermaid
-graph TB
-    A[Google Sheets<br/>Customer Data] -->|Read| B[Node.js App]
-    B -->|Calculate| C[Bill Engine]
-    C -->|Format| D[Message Template]
-    D -->|Send| E[whatsapp-web.js]
-    E -->|Deliver| F[WhatsApp Business]
-    B -->|Update| G[LastSent Column]
-    
-    H[node-cron<br/>Monthly Trigger] -.->|10AM 1st| B
-```
+erDiagram
 
-**Components**:
-1. **Data Layer**: Google Sheets API
-2. **Logic Layer**: Node.js + Bill Calculator
-3. **Messaging Layer**: whatsapp-web.js
-4. **Scheduling Layer**: node-cron
+    SHOP_OWNER {
+        int owner_id PK
+        string owner_name
+        string mobile_number
+        string shop_name
+    }
 
----
+    CUSTOMER {
+        int customer_id PK
+        string customer_name
+        string customer_phone
+    }
 
-## 8. Data Requirements
+    PRODUCT {
+        int product_id PK
+        string product_name
+        float unit_price
+    }
 
-### 8.1 Google Sheets Structure
-| Column | Data Type | Required | Format | Example |
-|--------|-----------|----------|--------|---------|
-| A: CustomerName | String | Yes | Text | "Ahmed Khan" |
-| B: WhatsAppNumber | String | Yes | 12 digits | "923001234567" |
-| C: GroceryBill | Number | Yes | Currency | 5200 |
-| D: ElectricBill | Number | Yes | Currency | 1800 |
-| E: LastSent | Date | No | YYYY-MM-DD | "2026-01-01" |
+    BILL {
+        int bill_id PK
+        date bill_date
+        float total_amount
+        int customer_id FK
+        int owner_id FK
+    }
 
-### 8.2 Data Validation Rules
-```
-1. WhatsAppNumber: /^92[0-9]{10}$/
-2. Bills: >= 0
-3. CustomerName: 2-50 characters
-4. Unique: WhatsAppNumber (no duplicates)
-```
+    BILL_ITEM {
+        int bill_item_id PK
+        int bill_id FK
+        int product_id FK
+        int quantity
+        float price
+    }
 
----
+    WHATSAPP_MESSAGE {
+        int message_id PK
+        int bill_id FK
+        string phone_number
+        string message_text
+        string delivery_status
+        datetime sent_time
+    }
 
-## 9. Interface Requirements
+    GOOGLE_SHEET {
+        int sheet_id
+        string stored_customer_data
+        string stored_bill_data
+        datetime last_updated
+    }
 
-### 9.1 User Interfaces
-| **Interface** | **Type** | **Description** |
-|---------------|----------|-----------------|
-| Console | CLI | Status messages, manual trigger |
-| Google Sheets | Web | Customer data entry/review |
+    SHOP_OWNER ||--o{ CUSTOMER : manages
+    CUSTOMER ||--o{ BILL : receives
+    SHOP_OWNER ||--o{ BILL : generates
+    BILL ||--o{ BILL_ITEM : contains
+    PRODUCT ||--o{ BILL_ITEM : includes
+    BILL ||--|| WHATSAPP_MESSAGE : sends
+    CUSTOMER ||--o{ GOOGLE_SHEET : stored_in
+    BILL ||--o{ GOOGLE_SHEET : stored_in
 
-### 9.2 External Interfaces
-| **Interface** | **Protocol** | **Requirement** |
-|---------------|--------------|-----------------|
-| WhatsApp Web | WebSocket | QR authentication |
-| Google Sheets | REST API | Service Account OAuth2 |
 
----
 
-## 10. Constraints
 
-### 10.1 Technical Constraints
-- WhatsApp Web session requires smartphone online
-- Google Sheets API quota: 100 requests/minute
-- Node.js v18+ required
-
-### 10.2 Business Constraints
-- Maximum 100 customers (Phase 1)
-- Single shop deployment only
-- PKT timezone mandatory
 
 ---
 
-## 11. Assumptions & Dependencies
+## 🔁 10️⃣ Software Development Life Cycle (SDLC)
 
-### 11.1 Assumptions
-- Shop owner maintains accurate Google Sheets
-- WhatsApp Business account available
-- Stable internet connection (24/7 for cron)
-- Customers keep active WhatsApp numbers
+### 1. Requirement Analysis
+- Identify billing needs
+- Identify communication medium
 
-### 11.2 Dependencies
-| **Component** | **Version** | **Purpose** |
-|---------------|-------------|-------------|
-| Node.js | 18+ | Runtime |
-| whatsapp-web.js | 1.22+ | WhatsApp |
-| google-spreadsheet | 4.x | Sheets |
-| node-cron | 3.x | Scheduling |
+### 2. System Design
+- Data structure
+- Message format
+- Workflow design
 
----
+### 3. Implementation
+- Google Sheets setup
+- WhatsApp Business configuration
 
-## 12. Verification & Validation
+### 4. Testing
+- Bill accuracy testing
+- Message delivery testing
 
-### 12.1 Test Cases
+### 5. Deployment
+- Live usage by shop owner
 
-| **ID** | **Description** | **Expected Result** | **Status** |
-|--------|-----------------|-------------------|------------|
-| TC-01 | Single customer send | Message delivered | ✅ |
-| TC-02 | Monthly cron trigger | All eligible customers | ✅ |
-| TC-03 | Duplicate prevention | No resend if LastSent current month | ✅ |
-| TC-04 | Invalid phone number | Skip with log error | ✅ |
-| TC-05 | Manual trigger | Single customer test | ✅ |
-| TC-06 | Rate limiting | 2s delay between messages | ✅ |
-
-### 12.2 Acceptance Criteria
-```
-[ ] 100% test case pass rate
-[ ] Zero WhatsApp bans after 3 months
-[ ] 95% manual effort reduction
-[ ] All FR-01 to FR-06 implemented
-[ ] Production deployment successful
-```
+### 6. Maintenance
+- Monthly data updates
+- Customer record updates
 
 ---
 
-## 📜 Approval
-
-```
-SRS Version 1.0 Approved For Development
-
-Prepared By: Muhammad Soman
-Date: January 20, 2026
+## 11️⃣ Use Case Diagram
 
 
-```
+
+
+
+🛒 ABC Grocery Store
+
+Customer: Ali Khan
+Billing Month: January 2026
+
+🧾 Grocery Bill: Rs. 8,500
+💡 Electricity Bill: Rs. 1,200
+📦 Other Charges: Rs. 300
+
+🔴 Total Payable: Rs. 10,000
+
+Please pay before 10 January.
+Thank you 🙏
+
+
+
+
 
 ---
 
-**Status**: 🟢 **SRS Complete** | **Ready for Implementation** | **Phase 1 Scope Locked**
-```
+## 15️⃣ Security Considerations
+
+- Restricted access to billing data
+- Customer privacy protection
+- Use of WhatsApp Business only
+
+---
+
+## 16️⃣ Deployment Strategy
+
+- Run using WhatsApp Business App
+- Maintain billing data in Google Sheets
+- Manual or scheduled monthly execution
+
+---
+
+## 17️⃣ Risk Analysis
+
+| Risk | Mitigation |
+|-----|------------|
+| Data loss | Regular backups |
+| Message failure | Manual resend option |
+| Human error | Validation checks |
+
+---
+
+## 18️⃣ Future Enhancements
+
+- WhatsApp Cloud API automation
+- PDF invoice generation
+- Payment gateway integration
+- Admin dashboard
+- Mobile application
+
+---
+
+## 19️⃣ Tools & Technologies
+
+- WhatsApp Business
+- Google Sheets
+- Internet Connectivity
+
+---
+
+## 20️⃣ Author
+
+**Muhammad Soman**  
+Software Engineering Student  
+Iqra University, Karachi  
+
+---
+
+## 21️⃣ License
+
+This project is licensed for **educational and small business usage only**.
+
+---
+
+⭐ *This system enables small businesses to move toward digital automation using simple and accessible tools.*
 
