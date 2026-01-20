@@ -1,283 +1,264 @@
 
-
 ```md
-# Automated WhatsApp Billing & Notification System for Grocery Shop
+# 🛒 WhatsApp-Based Grocery Billing & Notification System
 
-A professional, low-cost automation system that sends **monthly grocery and utility bill notifications to customers via WhatsApp**.  
-Designed specifically for **small to medium grocery shops** using WhatsApp Business.
+> An automated monthly billing and customer notification system for grocery shops using **WhatsApp Business**.
 
 ---
 
-## 📌 Project Overview
+## 📌 Overview
 
-Grocery shops often manage monthly billing manually, which leads to:
-- Human errors
-- Delayed payments
-- Poor customer communication
+The **WhatsApp-Based Grocery Billing & Notification System** helps grocery shop owners automatically send **monthly shopping bills, electricity bills, and other charges** to customers via **WhatsApp Business**.
 
-This system automates **monthly WhatsApp billing reminders** using:
-- Node.js
-- WhatsApp Web automation
-- Google Sheets as a lightweight database
+This solution is designed for **non-technical shop owners** and works with **only a mobile phone**.
 
 ---
 
 ## 🎯 Objectives
 
-- Automate monthly billing notifications
-- Reduce manual effort and calculation errors
+- Automate monthly grocery billing
+- Reduce manual calculation errors
 - Improve customer communication
-- Ensure WhatsApp-safe usage (no spam)
-- Enable future scalability (API, dashboard, payments)
+- Send timely payment reminders
+- Use WhatsApp as the primary communication channel
 
 ---
 
-## 🗺️ Project Roadmap
+## ❌ Problems Faced by Shop Owners
 
-### Phase 1 (Current – Core Automation)
-⏱ Estimated Time: **2–4 weeks**
-
-- WhatsApp Web automation
-- Google Sheets data source
-- Monthly scheduling using cron
-- Local deployment (PC/Laptop)
-
-### Phase 2 (Future – Professional Scale)
-- WhatsApp Business API
-- Admin dashboard (Web)
-- Payment integration (JazzCash / EasyPaisa)
-- Invoice PDF generation
-- Cloud deployment
+- Manual record keeping
+- Time-consuming bill calculations
+- Missed payment reminders
+- No centralized customer data
+- Human errors in billing
 
 ---
 
-## 🧰 Technology Stack
+## ✅ Proposed Solution
 
-### Phase 1 Stack
-
-| Layer | Technology | Purpose |
-|-----|-----------|--------|
-| Backend | Node.js | Core logic & automation |
-| WhatsApp | whatsapp-web.js | WhatsApp Web integration |
-| Database | Google Sheets / JSON | Customer & billing data |
-| Scheduler | node-cron | Monthly automation |
-| Runtime | Local PC / Laptop | Always-on execution |
-| Mobile | WhatsApp Business | QR authentication |
+A lightweight system that:
+- Stores customer data digitally
+- Calculates monthly bills automatically
+- Sends formatted bills via WhatsApp
+- Requires **no coding knowledge** initially
 
 ---
 
-## 📚 Learning Path
+## 👥 Target Users
 
-Recommended learning order (1–2 days each):
-
-1. **Node.js Basics**
-   - Async / Await
-   - Modules
-   - File I/O  
-   📖 freeCodeCamp Node.js
-
-2. **whatsapp-web.js**
-   - QR authentication
-   - Client initialization
-   - `client.sendMessage()`  
-   📖 https://pinault.org/blog/whatsapp-web-js-a-comprehensive
-
-3. **Google Sheets Integration**
-   - `google-spreadsheet` package
-   - Service account setup
-   - Read/write rows  
-   📖 https://blog.stephsmith.io/tutorial-google-sheets-api-node-js/
-
-4. **node-cron**
-   - Cron expressions
-   - Monthly scheduling  
-   📖 https://www.freecodecamp.org/news/schedule-a-job-in-node-with-nodecron/
-
-5. **Best Practices**
-   - Message delays (1–2 seconds)
-   - One message per month
-   - WhatsApp Business account usage
+- Grocery Shop Owners
+- Kirana Stores
+- Small Retail Businesses
+- Mobile-only Business Owners
 
 ---
 
-## 🧱 System Architecture
+## ⭐ Key Features
+
+- Customer Management
+- Monthly Bill Generation
+- WhatsApp Bill Notification
+- Payment Reminder System
+- Manual & Automated Workflow
+- Mobile Friendly
+
+---
+
+## 🧰 System Requirements
+
+### Hardware
+- Android / iOS Smartphone
+
+### Software
+- WhatsApp Business
+- Google Sheets / Excel
+- Internet Connection
+
+---
+
+## 🏗️ System Architecture
 
 ```
 
-Google Sheets (Customer Data)
-↓
-Node.js Application
-↓
-node-cron (Monthly Trigger)
-↓
-whatsapp-web.js
-↓
-WhatsApp Business
-↓
-Customer
++----------------+
+| Shop Owner     |
+| (Mobile Phone) |
++--------+-------+
+|
+v
++---------------------+
+| Customer & Billing  |
+| Data (Google Sheet) |
++--------+------------+
+|
+v
++---------------------+
+| Monthly Bill        |
+| Calculation Engine  |
++--------+------------+
+|
+v
++---------------------+
+| WhatsApp Business   |
+| Message Delivery    |
++---------------------+
 
-````
-
----
-
-## 📊 Data Structure (Google Sheet)
-
-| Column Name | Description |
-|------------|------------|
-| CustomerName | Customer full name |
-| WhatsAppNumber | Phone number (92xxxxxxxxxx) |
-| GroceryBill | Monthly grocery amount |
-| ElectricBill | Monthly electricity amount |
-| LastSent | Last message date |
-
----
-
-## ✉️ Message Template
-
-```text
-Assalam-o-Alaikum {{CustomerName}},
-
-🛒 Grocery Bill: Rs {{Grocery}}
-💡 Electric Bill: Rs {{Electric}}
----------------------
-💰 Total Bill: Rs {{Total}}
-
-Kindly pay by due date.
-
-Shukriya,
-{{ShopName}}
-````
-
----
-
-## ⚙️ Step-by-Step Implementation
-
-### 1️⃣ Project Setup
-
-```bash
-mkdir whatsapp-billing
-cd whatsapp-billing
-npm init -y
-npm install whatsapp-web.js qrcode-terminal google-spreadsheet node-cron
 ```
 
 ---
 
-### 2️⃣ Prepare Google Sheet
+## 🔁 Software Development Life Cycle (SDLC)
 
-* Create a Google Sheet
-* Add required columns
-* Create Google Cloud **Service Account**
-* Share sheet with service email
+### 1️⃣ Requirement Analysis
+- Monthly billing needs
+- Customer communication
+- WhatsApp-based delivery
 
----
+### 2️⃣ System Design
+- Customer database
+- Billing structure
+- Message templates
 
-### 3️⃣ WhatsApp Client
+### 3️⃣ Implementation
+- Google Sheets formulas
+- WhatsApp Business setup
 
-* Initialize WhatsApp client
-* Scan QR using WhatsApp Business
-* Persist session to avoid re-login
+### 4️⃣ Testing
+- Bill accuracy testing
+- Message delivery testing
 
----
+### 5️⃣ Deployment
+- Live usage by shop owner
 
-### 4️⃣ Data Handling
-
-* Read customers from Google Sheets
-* Calculate total bill
-* Validate phone numbers
-
----
-
-### 5️⃣ Message Logic
-
-* Generate message from template
-* Send via `client.sendMessage()`
-* Add delay between messages
+### 6️⃣ Maintenance
+- Customer updates
+- Monthly data management
 
 ---
 
-### 6️⃣ Scheduler
+## 📊 Use Case Diagram
 
-```js
-cron.schedule('0 10 1 * *', async () => {
-  // Send monthly messages
-});
 ```
 
-🕙 Runs on **1st of every month at 10:00 AM**
-
----
-
-### 7️⃣ Manual Testing
-
-* Add manual trigger (CLI / flag)
-* Send test message to admin number
-
----
-
-## 🚀 Deployment & Maintenance
-
-### Local Deployment
-
-* Keep PC & internet ON
-* Run using **PM2**
-
-```bash
-npm install -g pm2
-pm2 start index.js
+```
+    +-------------+
+    | Shop Owner  |
+    +------+------+ 
+           |
 ```
 
-### Monitoring
++-----------+-----------+
+|                       |
++--v----------------+  +--v----------------+
+| Manage Customers  |  | Generate Bills    |
++-------------------+  +-------------------+
+|
+v
++-----------------------------+
+| Send WhatsApp Notifications |
++-----------------------------+
 
-* Check logs monthly
-* Validate Google Sheet data
-* Ensure WhatsApp session is active
-
----
-
-## ⚠️ Risk Mitigation
-
-| Risk           | Mitigation                |
-| -------------- | ------------------------- |
-| WhatsApp Ban   | 1 message/month, 2s delay |
-| Data Errors    | Sheet validation & review |
-| Downtime       | PM2 auto-restart          |
-| Session Expiry | Persist session data      |
+```
 
 ---
 
-## 📈 Success Criteria
+## 🧩 Use Cases
 
-* 100% customers receive monthly messages
-* Reduced manual billing work
-* Improved on-time payments
-* Zero WhatsApp policy violations
+### UC-01: Manage Customer
+**Actor:** Shop Owner  
+**Description:** Add, update, or remove customer details
+
+### UC-02: Generate Monthly Bill
+**Actor:** System  
+**Description:** Calculates grocery + utility bills
+
+### UC-03: Send Bill on WhatsApp
+**Actor:** System  
+**Description:** Sends formatted bill message
+
+### UC-04: Payment Reminder
+**Actor:** System  
+**Description:** Sends reminders to unpaid customers
 
 ---
 
-## 🔮 Future Enhancements
+## 🧾 Sample WhatsApp Bill (Visual)
 
-* WhatsApp Business API
-* Admin dashboard
-* Payment links
-* Invoice PDF
-* Cloud hosting
+```
+
+🛒 ABC Grocery Store
+
+Customer: Ali Khan
+Billing Month: January 2026
+
+🧾 Grocery Bill: Rs. 8,500
+💡 Electricity Bill: Rs. 1,200
+📦 Other Charges: Rs. 300
+
+🔴 Total Payable: Rs. 10,000
+
+Please pay before 10 January.
+Thank you 🙏
+
+```
 
 ---
 
-## 👨‍💻 Author
+## 🗂️ Data Model (Google Sheet)
 
-**Muhammad Soman**
-Software Engineering Student
-Automated WhatsApp Billing System – 2026
+| Customer Name | Phone Number | Month | Grocery Bill | Electric Bill | Other Charges | Total |
+|--------------|--------------|-------|--------------|---------------|---------------|-------|
+| Ali Khan | 03XXXXXXXXX | Jan | 8500 | 1200 | 300 | 10000 |
+
+---
+
+## 🔐 Security Considerations
+
+- Restricted access to billing sheets
+- Customer data privacy
+- WhatsApp Business verified number
+
+---
+
+## 📈 Future Enhancements
+
+- WhatsApp Cloud API Automation
+- PDF Invoice Generation
+- Payment Gateway Integration
+- Admin Dashboard
+- Mobile Application
+- SMS Backup Notifications
+
+---
+
+## 🛠️ Tools & Technologies
+
+- WhatsApp Business
+- Google Sheets / Excel
+- WhatsApp Cloud API (Future)
+
+---
+
+## 👨‍💻 Developed By
+
+**Muhammad Soman**  
+Software Engineering Student  
+Iqra University, Karachi
 
 ---
 
 ## 📜 License
 
-This project is for **educational and small business use**.
-Commercial use requires compliance with WhatsApp policies.
+This project is intended for **educational and small business use**.
 
+---
+
+## ⭐ Final Note
+
+This system is **simple, scalable, and cost-effective**, perfect for local grocery shops starting digital transformation with WhatsApp.
+
+> “Simple tools can create powerful systems.”
+
+---
 ```
-
 
